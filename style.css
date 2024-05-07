@@ -1,11 +1,14 @@
 .pagination-buttons{
     display: none;
 }
+.inpt{
+    margin-left: 20%;
+}
 
 .table-header-row{
     font-size: 1.2rem;
     font-weight: 400px;
-    width: 100%;
+    width:auto;
 }
 .data-table {
     border-collapse: collapse;

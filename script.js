@@ -114,17 +114,6 @@ $(document).ready(function() {
         });
     }
 
-    // Next button click event
-    $('#next-btn, #prev-btn').on('click', function() {
-        if ($(this).attr('id') === 'next-btn') {
-            currentPage++;
-        } else {
-            if (currentPage > 1) {
-                currentPage--;
-            }
-        }
-        // Reload data with new page
-        $('#file-upload-label').click();
-    });
 
 });
+
