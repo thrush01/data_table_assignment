@@ -1,3 +1,21 @@
-.fle{
-    margin: 20%;
+
+
+.table-header-row{
+    font-size: 1.2rem;
+    font-weight: 400px;
+    width: 100%;
+}
+.data-table {
+    border-collapse: collapse;
+    width: auto;
+}
+
+.data-table th, #data-table td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.data-table th {
+    background-color: #f2f2f2;
 }
