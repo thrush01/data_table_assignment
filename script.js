@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     // Variables to keep track of pagination
     let currentPage = 1;
-    const rowsPerPage = 11;
+    const rowsPerPage = 10;
 
     // Function to handle pagination
     function paginateData(data) {
@@ -14,6 +14,7 @@ $(document).ready(function() {
     // On click event for button
     $('#file-upload-label').on('click', function() {
         $('.card').hide();
+        $('.pagination-buttons').show();
         // Input value
         let fileInput = $('#file-upload-input')[0].files[0];
 
@@ -114,19 +115,16 @@ $(document).ready(function() {
     }
 
     // Next button click event
-    $('#next-btn').on('click', function() {
-        currentPage++;
+    $('#next-btn, #prev-btn').on('click', function() {
+        if ($(this).attr('id') === 'next-btn') {
+            currentPage++;
+        } else {
+            if (currentPage > 1) {
+                currentPage--;
+            }
+        }
         // Reload data with new page
         $('#file-upload-label').click();
-    });
-
-    // Previous button click event
-    $('#prev-btn').on('click', function() {
-        if (currentPage > 1) {
-            currentPage--;
-            // Reload data with new page
-            $('#file-upload-label').click();
-        }
     });
 
 });

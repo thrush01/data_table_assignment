@@ -1,4 +1,6 @@
-
+.pagination-buttons{
+    display: none;
+}
 
 .table-header-row{
     font-size: 1.2rem;
