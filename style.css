@@ -3,7 +3,7 @@
     margin-left: 20%;
     margin-top:10%;
 }
-.pagination-buttons{
+.pagination-buttons,.search{
     display: none;
 }
 

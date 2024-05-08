@@ -33,6 +33,10 @@
                     <button class="btn btn-primary" id="file-upload-label">Choose CSV or Excel File</button>
                 </div>
             </div>
+            <div class="search">
+                <input type="text"id="rowSearch" class="rowSearch">
+              <button class="btn" id="search"><i class="fas fa-search"></i></button>
+            </div>
 
             <div class="card">
                 <p class="text-center">Any uloaded csv or excel file will be dispalyed
@@ -41,8 +45,7 @@
             </div>
 
             <div id="table">
-
-                <table class="data-table table-responsive table">
+                <table class="data-table table-responsive">
                     <thead class="bg-primary">
                         <tr class="table-header-row">
 
@@ -54,8 +57,8 @@
                 </table>
             </div>
             <div class="pagination-buttons text-center">
-                <button id="prev-btn">Previous</button>
-                <button id="next-btn">Next</button>
+                <button class="btn btn-sm btn-outline-primary mt-2" id="prev-btn">Previous</button>
+                <button class="btn  btn-sm btn-outline-primary mt-2" id="next-btn">Next</button>
             </div>
 
         </main>

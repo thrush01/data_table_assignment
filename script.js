@@ -15,6 +15,7 @@ $(document).ready(function() {
     $('#file-upload-label').on('click', function() {
         $('.card').hide();
         $('.pagination-buttons').show();
+        $('.search').show();
         // Input value
         let fileInput = $('#file-upload-input')[0].files[0];
 
@@ -57,6 +58,9 @@ $(document).ready(function() {
             }
         } else {
             console.log("No file selected.");
+            $('.pagination-buttons').hide();
+        $('.search').hide();
+
         }
     });
 
@@ -81,7 +85,6 @@ $(document).ready(function() {
             tableBody.append(rowHtml);
         });
 
-        // Initializing DataTable with pagination
         
     }
 
@@ -104,12 +107,24 @@ $(document).ready(function() {
             tableBody.append(rowHtml);
         });
 
-        // Initializing DataTable with pagination
-        $('.data-table').DataTable({
-            paging: true,
-            pageLength: rowsPerPage
+    }
+
+    function searchTable() {
+        let searchText = $('#rowSearch').val().toLowerCase();
+        $('.table-body tr').each(function() {
+            let rowData = $(this).text().toLowerCase();
+            if (rowData.indexOf(searchText) === -1) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
         });
     }
+    
+    // Event listener for the search button
+    $('#search').on('click', function() {
+        searchTable();
+    });
 
     // Next button click event
     $('#next-btn, #prev-btn').on('click', function() {
