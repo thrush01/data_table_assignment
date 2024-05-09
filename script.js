@@ -12,7 +12,6 @@ $(document).ready(function () {
         const endIndex = startIndex + rowsPerPage;
         return data.slice(startIndex, endIndex);
     }
-
     // Function to create the table dynamically
     function createTable() {
         let tableDiv = $('#table');
@@ -20,16 +19,12 @@ $(document).ready(function () {
         let tableHeader = $('<thead>').addClass();
         let tableHeaderRow = $('<tr>').addClass('table-header-row');
         let tableBody = $('<tbody>').addClass('table-body justify-content-between');
-
         // Append table header row to table header
         tableHeader.append(tableHeaderRow);
-
         // Append table header to table
         table.append(tableHeader);
-
         // Append table body to table
         table.append(tableBody);
-
         // Append table to tableDiv
         tableDiv.append(table);
     }
@@ -161,5 +156,5 @@ $(document).ready(function () {
         // Reload data with new page
         $('#file-upload-label').click();
     });
-    
+
 });
