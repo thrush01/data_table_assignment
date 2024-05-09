@@ -2,32 +2,10 @@ $(document).ready(function () {
     // Variables to keep track of pagination
     $('.pagination-buttons').hide();
     $('.search').hide();
-
     let currentPage = 1;
     const rowsPerPage = 10;
 
-    // Function to handle pagination
-    function paginating_data(data) {
-        const startIndex = (currentPage - 1) * rowsPerPage;
-        const endIndex = startIndex + rowsPerPage;
-        return data.slice(startIndex, endIndex);
-    }
-    // Function to create the table dynamically
-    function createTable() {
-        let tableDiv = $('#table');
-        let table = $('<table>').addClass('data-table table-responsive ');
-        let tableHeader = $('<thead>').addClass();
-        let tableHeaderRow = $('<tr>').addClass('table-header-row');
-        let tableBody = $('<tbody>').addClass('table-body justify-content-between');
-        // Append table header row to table header
-        tableHeader.append(tableHeaderRow);
-        // Append table header to table
-        table.append(tableHeader);
-        // Append table body to table
-        table.append(tableBody);
-        // Append table to tableDiv
-        tableDiv.append(table);
-    }
+ 
 
     // Call createTable function to create the table dynamically
     createTable();
@@ -42,35 +20,30 @@ $(document).ready(function () {
         let fileInput = $('#file-upload-input')[0].files[0];
 
         // Checking if the input is not empty
-        console.log(fileInput);
         if (fileInput) {
             // Getting file name and extension
             let fileName = fileInput.name;
 
             // Checking if the file is CSV or Excel
             if (fileName.endsWith('.csv')) {
-
                 Papa.parse(fileInput, {
                     complete: function (results) {
                         csv_data(results.data);
                     },
                     header: true
                 });
-
             } else if (fileName.endsWith('.xls') || fileName.endsWith('.xlsx')) {
-
                 let reader = new FileReader();
                 reader.onload = function (event) {
-                    // Reading data as an array
+                    // Reading data as an array buffer
                     let data = new Uint8Array(event.target.result);
-                    let workbook = XLSX.read(data, { type: 'array' });
-                    let sheet = workbook.Sheets[workbook.SheetNames[0]];
+                    let data_book = XLSX.read(data, { type: 'array' });
+                    let sheet = data_book.Sheets[data_book.SheetNames[0]];
                     let jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
                     excel_data(jsonData);
                 };
-                // Reading the data and converting to array
+                // Reading the data and converting to array buffer
                 reader.readAsArrayBuffer(fileInput);
-
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -84,8 +57,7 @@ $(document).ready(function () {
             $('.search').hide();
         }
     });
-
-    // Function for handling CSV files
+// Function for handling CSV files
     function csv_data(data) {
         let tableHeaderRow = $('.table-header-row');
         let tableBody = $('.table-body');
@@ -117,16 +89,21 @@ $(document).ready(function () {
         data[0].forEach(header => {
             tableHeaderRow.append(`<th>${header}</th>`);
         });
-        paginating_data(data).forEach(row => {
-            let rowHtml = '<tr>';
+        console.log('test: ',data[0])
+        paginating_data(data).forEach(row =>{
+            if(row !== data[0]){
+                let rowHtml = '<tr>';
             row.forEach(cell => {
                 rowHtml += `<td>${cell}</td>`;
             });
             rowHtml += '</tr>';
             tableBody.append(rowHtml);
+            }
+            
         });
     }
 
+    // Function to search the table
     function searchTable() {
         let searchText = $('#rowSearch').val().toLowerCase();
         $('.table-body tr').each(function () {
@@ -139,12 +116,36 @@ $(document).ready(function () {
         });
     }
 
-    // Event listener for the search button
+       // Function to handle pagination
+       function paginating_data(data) {
+        const startIndex = (currentPage - 1) * rowsPerPage;
+        const endIndex = Math.min(startIndex + rowsPerPage, data.length); // Ensure endIndex doesn't exceed data length
+        return data.slice(startIndex, endIndex);
+    }
+
+    // Function to create the table dynamically
+    function createTable() {
+        let tableDiv = $('#table');
+        let table = $('<table>').addClass('data-table table-responsive ');
+        let tableHeader = $('<thead>');
+        let tableHeaderRow = $('<tr>').addClass('table-header-row');
+        let tableBody = $('<tbody>').addClass('table-body justify-content-between');
+        // Append table header row to table header
+        tableHeader.append(tableHeaderRow);
+        // Append table header to table
+        table.append(tableHeader);
+        // Append table body to table
+        table.append(tableBody);
+        // Append table to tableDiv
+        tableDiv.append(table);
+    }
+
+    // Event listener for the search input
     $('#rowSearch').on('input', function () {
         searchTable();
     });
 
-    // Next button click event
+    // Next and Previous button click events
     $('#next-btn, #prev-btn').on('click', function () {
         if ($(this).attr('id') === 'next-btn') {
             currentPage++;
@@ -153,8 +154,6 @@ $(document).ready(function () {
                 currentPage--;
             }
         }
-        // Reload data with new page
-        $('#file-upload-label').click();
+        $('#file-upload-label').click(); // Trigger file upload label click to reload data with new page
     });
-
 });
