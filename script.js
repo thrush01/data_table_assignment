@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     // Variables to keep track of pagination
     let currentPage = 1;
     const rowsPerPage = 10;
@@ -11,10 +10,35 @@ $(document).ready(function() {
         return data.slice(startIndex, endIndex);
     }
 
+    // Function to create the table dynamically
+    function createTable() {
+        let tableDiv = $('#table');
+        let table = $('<table>').addClass('data-table table-responsive');
+        let tableHeader = $('<thead>').addClass('bg-primary');
+        let tableHeaderRow = $('<tr>').addClass('table-header-row');
+        let tableBody = $('<tbody>').addClass('table-body justify-content-between');
+
+        // Append table header row to table header
+        tableHeader.append(tableHeaderRow);
+
+        // Append table header to table
+        table.append(tableHeader);
+
+        // Append table body to table
+        table.append(tableBody);
+
+        // Append table to tableDiv
+        tableDiv.append(table);
+    }
+
+    // Call createTable function to create the table dynamically
+    createTable();
+
     // On click event for button
     $('#file-upload-label').on('click', function() {
         $('.card').hide();
         $('.pagination-buttons').show();
+        $('#page').text(currentPage);
         $('.search').show();
         // Input value
         let fileInput = $('#file-upload-input')[0].files[0];
@@ -59,8 +83,7 @@ $(document).ready(function() {
         } else {
             console.log("No file selected.");
             $('.pagination-buttons').hide();
-        $('.search').hide();
-
+            $('.search').hide();
         }
     });
 
@@ -84,8 +107,6 @@ $(document).ready(function() {
             rowHtml += '</tr>';
             tableBody.append(rowHtml);
         });
-
-        
     }
 
     // Function for handling Excel files
@@ -106,7 +127,6 @@ $(document).ready(function() {
             rowHtml += '</tr>';
             tableBody.append(rowHtml);
         });
-
     }
 
     function searchTable() {
@@ -120,7 +140,7 @@ $(document).ready(function() {
             }
         });
     }
-    
+
     // Event listener for the search button
     $('#search').on('click', function() {
         searchTable();
@@ -138,5 +158,4 @@ $(document).ready(function() {
         // Reload data with new page
         $('#file-upload-label').click();
     });
-
 });
