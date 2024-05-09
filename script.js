@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // Variables to keep track of pagination
     let currentPage = 1;
     const rowsPerPage = 10;
@@ -13,8 +13,8 @@ $(document).ready(function() {
     // Function to create the table dynamically
     function createTable() {
         let tableDiv = $('#table');
-        let table = $('<table>').addClass('data-table table-responsive');
-        let tableHeader = $('<thead>').addClass('bg-primary');
+        let table = $('<table>').addClass('data-table table-responsive ');
+        let tableHeader = $('<thead>').addClass();
         let tableHeaderRow = $('<tr>').addClass('table-header-row');
         let tableBody = $('<tbody>').addClass('table-body justify-content-between');
 
@@ -35,7 +35,7 @@ $(document).ready(function() {
     createTable();
 
     // On click event for button
-    $('#file-upload-label').on('click', function() {
+    $('#file-upload-label').on('click', function () {
         $('.card').hide();
         $('.pagination-buttons').show();
         $('#page').text(currentPage);
@@ -53,7 +53,7 @@ $(document).ready(function() {
             if (fileName.endsWith('.csv')) {
 
                 Papa.parse(fileInput, {
-                    complete: function(results) {
+                    complete: function (results) {
                         csv_data(results.data);
                     },
                     header: true
@@ -62,7 +62,7 @@ $(document).ready(function() {
             } else if (fileName.endsWith('.xls') || fileName.endsWith('.xlsx')) {
 
                 let reader = new FileReader();
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     // Reading data as an array
                     let data = new Uint8Array(event.target.result);
                     let workbook = XLSX.read(data, { type: 'array' });
@@ -131,7 +131,7 @@ $(document).ready(function() {
 
     function searchTable() {
         let searchText = $('#rowSearch').val().toLowerCase();
-        $('.table-body tr').each(function() {
+        $('.table-body tr').each(function () {
             let rowData = $(this).text().toLowerCase();
             if (rowData.indexOf(searchText) === -1) {
                 $(this).hide();
@@ -142,12 +142,12 @@ $(document).ready(function() {
     }
 
     // Event listener for the search button
-    $('#search').on('click', function() {
+    $('#search').on('click', function () {
         searchTable();
     });
 
     // Next button click event
-    $('#next-btn, #prev-btn').on('click', function() {
+    $('#next-btn, #prev-btn').on('click', function () {
         if ($(this).attr('id') === 'next-btn') {
             currentPage++;
         } else {
