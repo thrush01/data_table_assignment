@@ -25,7 +25,8 @@ img{
     max-width:2em;
 }
 header{
-    background-color: #e4f8e4;
+   
+   background:linear-gradient(10deg, rgb(20, 20, 20), rgb(246, 246, 252), rgb(28, 28, 29));
 }
 .data-table th,
 td {
@@ -43,5 +44,5 @@ tr:hover td {
 }
 
 .data-table th {
-    background-color: #d6dbd6;
+    background-color: #c7dff0;
 }
