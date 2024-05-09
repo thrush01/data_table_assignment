@@ -1,5 +1,8 @@
 $(document).ready(function () {
     // Variables to keep track of pagination
+    $('.pagination-buttons').hide();
+    $('.search').hide();
+
     let currentPage = 1;
     const rowsPerPage = 10;
 
@@ -142,7 +145,7 @@ $(document).ready(function () {
     }
 
     // Event listener for the search button
-    $('#search').on('click', function () {
+    $('#rowSearch').on('input', function () {
         searchTable();
     });
 
@@ -158,4 +161,5 @@ $(document).ready(function () {
         // Reload data with new page
         $('#file-upload-label').click();
     });
+    
 });

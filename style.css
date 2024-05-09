@@ -3,11 +3,6 @@
     margin-top: 10%;
 }
 
-.pagination-buttons,
-.search {
-    display: none;
-}
-
 .pageNum:hover {
     cursor: default;
     border: rgb(244, 244, 245);
@@ -25,7 +20,13 @@
     border-collapse: collapse;
     width: auto;
 }
-
+img{
+   
+    max-width:2em;
+}
+header{
+    background-color: #e4f8e4;
+}
 .data-table th,
 td {
     border: 0.5px solid #d7eec7;
