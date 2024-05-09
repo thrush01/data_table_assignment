@@ -7,7 +7,7 @@ $(document).ready(function () {
     const rowsPerPage = 10;
 
     // Function to handle pagination
-    function paginateData(data) {
+    function paginating_data(data) {
         const startIndex = (currentPage - 1) * rowsPerPage;
         const endIndex = startIndex + rowsPerPage;
         return data.slice(startIndex, endIndex);
@@ -97,7 +97,7 @@ $(document).ready(function () {
             tableHeaderRow.append(`<th>${header}</th>`);
         });
         // Looping through the data and appending the results to the HTML table element
-        paginateData(data).forEach(row => {
+        paginating_data(data).forEach(row => {
             let rowHtml = '<tr>';
             Object.values(row).forEach(cell => {
                 rowHtml += `<td>${cell}</td>`;
@@ -117,7 +117,7 @@ $(document).ready(function () {
         data[0].forEach(header => {
             tableHeaderRow.append(`<th>${header}</th>`);
         });
-        paginateData(data).forEach(row => {
+        paginating_data(data).forEach(row => {
             let rowHtml = '<tr>';
             row.forEach(cell => {
                 rowHtml += `<td>${cell}</td>`;
